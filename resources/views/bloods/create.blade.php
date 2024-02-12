@@ -14,7 +14,7 @@
                         <div class="form-group row">
                             
                             <div class="col-md-8 ml-4 ml-4">
-                                <input id="name" type="text" class="form-control " name="name" value="{{ old('name') }}"
+                                <input id="name" type="text" class="form-control " name="name" value="{{ Auth::user()->name }}"
                                 autocomplete="name">
                                 <div> {{$errors->first('name')}} </div>
                             </div>
@@ -24,7 +24,7 @@
                         <div class="form-group row">
                             
                             <div class="col-md-8 ml-4 ml-4">
-                                <input id="year" type="text" class="form-control " name="year" value="{{ old('year') }}"
+                                <input id="year" type="text" class="form-control " name="year" value="{{ Auth::user()->year }}"
                                 autocomplete="year">
                                 <div> {{$errors->first('year')}} </div>
                             </div>
@@ -51,13 +51,24 @@
                             </div>
                             <label for="bank" class="col-md-2 col-form-label text-md-right"> البنك</label>
                         </div>
-                        
+                        <div class="form-group row">
+                            
+                            <div class="col-md-8 ml-4">
+                                <input id="bank" type="file" class="form-control "
+                                name="bank">
+                                <div> {{$errors->first('bank')}} </div>
+                            </div>
+                            <label for="bank" class="col-md-2 col-form-label text-md-right"> الوثيقة</label>
+                        </div>
                        
                         <div class="form-group row mb-0">
                             <div class="col-md-8 ml-4 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     ارسال الطلب
-                                </button>
+                                </button><br><br>
+                                <div class="popup" onclick="myFunction()"><i class="fa fa-info"></i> info
+  <span class="popuptext" id="myPopup">تطلب هذه الوثيقة من اجل طلب اعفاء من التبرع بالدم لطلاب السنة الخامسة </span>
+</div>
                             </div>
                         </div>
                     </form>

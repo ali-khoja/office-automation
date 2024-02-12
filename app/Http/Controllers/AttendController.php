@@ -56,12 +56,10 @@ class AttendController extends Controller
 
     public function update(Request $request, Attend $attend)
     {
-        $vali = $request->validate([
-            'name' => 'required|min:3',
-        ]);
-
-        $data = $request->only(['name']);
-        $attend->update($data);
+        //dd($request);
+        $a=$request->statues;
+        $b=$request->message;
+        $attend->update(['st'=>$a , 'messeage'=>$b]);
         toast('Your attend was Updated successfully !', 'success');
         return redirect(route('attends.index'));
     }

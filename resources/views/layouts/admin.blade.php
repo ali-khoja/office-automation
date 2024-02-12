@@ -4,13 +4,70 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
+<style>
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+</style>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Boilerplate</title>
+    <title>IT - 2022</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -51,15 +108,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
-                                                                                                                                     document.getElementById('logout-form').submit();">
-                                <i class="fa fa-power-off"></i> {{ __('Logout') }}
+                                    document.getElementById('logout-form').submit();"><i
+                                        class="fa fa-user-slash"></i> Logout
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
                             <a href=" {{ route('users.index') }} " class="dropdown-item"><i class="fa fa-users-cog"></i>
-                                User Managment</a>
+                                User Managment</a> 
                             @if (Auth::user()->isImpersonating())
                                 <a href="{{ route('stopImper') }}" class="dropdown-item"> <i
                                         class="fa fa-user-slash"></i>
@@ -90,8 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         @if (!Auth::user()->image)
                             <img src="/img/user.svg" class="img-circle elevation-2" alt="User Image">
                         @else
-                            <img src=" {{ asset('storage/' . Auth::user()->image) }} " class="img-circle elevation-2"
-                                alt="User Image">
+                        <img src="/img/user.svg" class="img-circle elevation-2" alt="User Image">
                         @endif
                     </div>
                     <div class="info">
@@ -106,66 +162,66 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     @if (Auth::user()->hasRole('student'))
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
-
+                            <li class="nav-item">
+                                <a href="{{ route('attends.create') }}" class="nav-link ">
+                                    <p>وثيقة دوام</p>
+                                </a>
+                            </li>
+                            
                             <li class="nav-item">
                                 <a href="{{ route('marks.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
-                                    <p>كشف علامات</p>
+                                    <p> كشف علامات ماجستير</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('exam1s.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p>التقدم لدورة التكميلي ماستر</p>
                                 </a>
                             </li>
-
+                            <li class="nav-item">
+                                <a href="{{ route('lifens.create') }}" class="nav-link ">
+                                    <p> حياة جامعية </p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{ route('unilives.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p> حياة جامعية لطلاب الماجستير</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('certms.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p>وثيقة دوام ماستر</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('erejects.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p>اعتراض عملي </p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('gradcerts.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p> مصدقة تخرج </p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('manuals.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p> طلب يدوي </p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('rejects.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p> طلب اعتراض </p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('sregests.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p> استرداد ايقاف تسجيل </p>
                                 </a>
                             </li>
@@ -173,42 +229,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <li class="nav-item">
                                 <a href="{{ route('bloods.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p>طلب اعفاء من سحب الدم</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('fund1s.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p>تقسيط رسوم التسجيل </p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('grads.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p>اشعار تخرج </p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('items.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p>توصيف مقررات </p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('seconds.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p>طلب وثيقة ثانوية </p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ route('termens.create') }}" class="nav-link ">
-                                    <i class=" fa fa-address-book nav-icon"></i>
                                     <p> طلب ترقين القيد </p>
                                 </a>
                             </li>
@@ -218,110 +268,167 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('manager'))
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
-
+                    <li class="nav-item">
+                        <a href="{{ route('attends.index') }}" class="nav-link ">
+                            <p>وثيقة دوام</p>
+                           <div class="badge badge-primary">
+                               
+                               {{$ac}}
+                        </div> 
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ route('marks.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p>كشف علامات</p>
+                           <div class="badge badge-primary">
+                               
+                               {{$mac}}
+                        </div> 
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('exam1s.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p>التقدم لدورة التكميلي ماستر</p>
+                           <div class="badge badge-primary">
+                               
+                               {{$exc}}
+                        </div> 
                         </a>
                     </li>
-
+                   
                     <li class="nav-item">
                         <a href="{{ route('unilives.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p> حياة جامعية لطلاب الماجستير</p>
+                           <div class="badge badge-primary">
+                               
+                               {{$unc}}
+                        </div> 
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('certms.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p>وثيقة دوام ماستر</p>
+                           <div class="badge badge-primary">
+                               
+                               {{$cc}}
+                        </div> 
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('erejects.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p>اعتراض عملي </p>
+                           <div class="badge badge-primary">
+                               
+                               {{$erc}}
+                        </div> 
                         </a>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="{{ route('lifens.index') }}" class="nav-link ">
+                            <p>حياة جامعية </p>
+                           <div class="badge badge-primary">
+                               
+                               {{$lc}}
+                        </div> 
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ route('gradcerts.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p> مصدقة تخرج </p>
+                           <div class="badge badge-primary">
+                               
+                               {{$grac}}
+                        </div> 
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('manuals.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p> طلب يدوي </p>
+                           <div class="badge badge-primary">
+                               
+                               {{$mc}}
+                        </div> 
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('rejects.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p> طلب اعتراض </p>
+                           <div class="badge badge-primary">
+                               
+                               {{$rec}}
+                        </div> 
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('sregests.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p> استرداد ايقاف تسجيل </p>
+                           <div class="badge badge-primary">
+                               
+                               {{$src}}
+                        </div> 
                         </a>
                     </li>
 
 
                     <li class="nav-item">
                         <a href="{{ route('bloods.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p>طلب اعفاء من سحب الدم</p>
+                           <div class="badge badge-primary">
+                               
+                               {{$bc}}
+                        </div> 
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('fund1s.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p>تقسيط رسوم التسجيل </p>
+                           <div class="badge badge-primary">
+                               
+                               {{$fc}}
+                        </div> 
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('grads.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p>اشعار تخرج </p>
+                           <div class="badge badge-primary">
+                               
+                               {{$grc}}
+                        </div> 
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('items.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p>توصيف مقررات </p>
+                           <div class="badge badge-primary">
+                               
+                               {{$ic}}
+                        </div> 
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('seconds.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p>طلب وثيقة ثانوية </p>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="{{ route('termens.index') }}" class="nav-link ">
-                            <i class=" fa fa-address-book nav-icon"></i>
                             <p> طلب ترقين القيد </p>
+                           <div class="badge badge-primary">
+                               
+                               {{$tec}}
+                        </div> 
                         </a>
                     </li>
 
@@ -346,6 +453,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <script src="/js/app.js"></script>
     @include('sweetalert::alert')
+    <script>
+// When the user clicks on div, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
 </body>
 
 </html>

@@ -5,7 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header text-right alert alert-primary "> وثيقة دوام </div>
+                
+                <div class="card-header text-right alert alert-primary "> وثيقة دوام      </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('attends.store') }}" enctype="multipart/form-data">
@@ -14,7 +15,7 @@
                         <div class="form-group row">
                             
                             <div class="col-md-8 ml-4 ml-4">
-                                <input id="name" type="text" class="form-control " name="name" value="{{ old('name') }}"
+                                <input id="name" type="text" class="form-control " name="name" value="{{ Auth::user()->name }}"
                                 autocomplete="name">
                                 <div> {{$errors->first('name')}} </div>
                             </div>
@@ -24,7 +25,7 @@
                         <div class="form-group row">
                             
                             <div class="col-md-8 ml-4 ml-4">
-                                <input id="year" type="text" class="form-control " name="year" value="{{ old('year') }}"
+                                <input id="year" type="text" class="form-control " name="year" value="{{ Auth::user()->year }}"
                                 autocomplete="year">
                                 <div> {{$errors->first('year')}} </div>
                             </div>
@@ -34,7 +35,7 @@
                         <div class="form-group row">
                             
                             <div class="col-md-8 ml-4 ml-4">
-                                <input id="section" type="text" class="form-control " name="section" value="{{ old('section') }}"
+                                <input id="section" type="text" class="form-control " name="section" value="{{ Auth::user()->specialize }}"
                                 autocomplete="section">
                                 <div> {{$errors->first('section')}} </div>
                             </div>
@@ -44,7 +45,7 @@
                         <div class="form-group row">
                             
                             <div class="col-md-8 ml-4 ml-4">
-                                <input id="dad" type="text" class="form-control " name="dad" value="{{ old('dad') }}"
+                                <input id="dad" type="text" class="form-control " name="dad" value="{{ Auth::user()->dad }}"
                                 autocomplete="dad">
                                 <div> {{$errors->first('dad')}} </div>
                             </div>
@@ -66,7 +67,10 @@
                             <div class="col-md-8 ml-4 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     ارسال الطلب
-                                </button>
+                                </button><br><br>
+                                <div class="popup" onclick="myFunction()"><i class="fa fa-info"></i> info
+  <span class="popuptext" id="myPopup">تطلب هذه الوثيقة لاثبات دوام الطالب ضمن الكلية وحضوره للمحاضرات النظرية والعملية ويطلب إدخال بيانات الطالب الاسساسية بالاضافة لعام الدوام والفصل</span>
+</div>
                             </div>
                         </div>
                     </form>
